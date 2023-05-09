@@ -1,6 +1,5 @@
 import 'package:dawaey/cubit_shop/cubit.dart';
 import 'package:dawaey/modules/on_boarding/on_boarding_screen.dart';
-import 'package:dawaey/modules/user_home/user_home.dart';
 import 'package:dawaey/shared/components/constans.dart';
 import 'package:dawaey/shared/cubit/bloc_observer.dart';
 import 'package:dawaey/shared/cubit_app/cubit.dart';
@@ -34,7 +33,7 @@ Future<void> main() async {
   // }
 
   runApp(MyApp(
-    startWidget: UserHome(),
+    startWidget: OnBoardingScreen(),
     isDark: isDark,
   ));
 }
