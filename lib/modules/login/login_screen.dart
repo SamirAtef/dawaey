@@ -1,8 +1,8 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:dawaey/layout/shop_layout/shop_layout.dart';
 import 'package:dawaey/modules/login/cubit_login/cubit.dart';
 import 'package:dawaey/modules/login/cubit_login/states.dart';
 import 'package:dawaey/modules/register/register_screen.dart';
+import 'package:dawaey/modules/user_home/user_home.dart';
 import 'package:dawaey/shared/components/components.dart';
 import 'package:dawaey/shared/components/constans.dart';
 import 'package:dawaey/shared/network/local/cache_helper.dart';
@@ -24,22 +24,22 @@ class LoginScreen extends StatelessWidget {
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
         listener: (context, state) {
           if (state is ShopLoginSuccessState) {
-            if (state.loginModel.status!) {
-              print(state.loginModel.message);
+            if (state.loginModel.status != "success") {
+              print(state.loginModel.status);
               print(state.loginModel.data?.token);
               CacheHelper.saveData(
                       key: 'token', value: state.loginModel.data!.token)
                   .then((value) {
                 token = state.loginModel.data?.token;
-                navigateAndFinish(context, const ShopLayout());
+                navigateAndFinish(context, UserHome());
               });
               showToast(
                   state: ToastState.success,
-                  text: state.loginModel.message.toString());
+                  text: state.loginModel.status.toString());
             } else {
-              print(state.loginModel.message);
+              print(state.loginModel.status);
               showToast(
-                text: state.loginModel.message.toString(),
+                text: state.loginModel.status.toString(),
                 state: ToastState.error,
               );
             }
