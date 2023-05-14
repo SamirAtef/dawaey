@@ -1,6 +1,8 @@
+import 'package:dawaey/api_service.dart';
 import 'package:dawaey/cubit_shop/cubit.dart';
 import 'package:dawaey/modules/login/login_screen.dart';
 import 'package:dawaey/modules/on_boarding/on_boarding_screen.dart';
+import 'package:dawaey/modules/user_home/cubit/home_cubit_cubit.dart';
 import 'package:dawaey/modules/user_home/user_home.dart';
 import 'package:dawaey/shared/components/constans.dart';
 import 'package:dawaey/shared/cubit/bloc_observer.dart';
@@ -8,9 +10,9 @@ import 'package:dawaey/shared/cubit_app/cubit.dart';
 import 'package:dawaey/shared/cubit_app/states.dart';
 import 'package:dawaey/shared/network/remote/dio_helper.dart';
 import 'package:dawaey/shared/styles/themes.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'shared/network/local/cache_helper.dart';
 
 Future<void> main() async {
@@ -35,7 +37,7 @@ Future<void> main() async {
   }
 
   runApp(MyApp(
-    startWidget: OnBoardingScreen(),
+    startWidget: UserHome(),
     isDark: isDark,
   ));
 }

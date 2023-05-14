@@ -1,39 +1,37 @@
 import 'package:dawaey/api_service.dart';
-import 'package:dawaey/models/medicine_model/medicine.dart';
-import 'package:dawaey/modules/user_home/medicine_list.dart';
+import 'package:dawaey/models/location_model/location_model.dart';
+import 'package:dawaey/modules/MedicineByLocation/location_search.dart';
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 
-class MedicineListTab extends StatefulWidget {
+class LocationListTab extends StatefulWidget {
   @override
-  _MedicineListTabState createState() => _MedicineListTabState();
+  State<LocationListTab> createState() => _LocationListTabState();
 }
 
-class _MedicineListTabState extends State<MedicineListTab> {
+class _LocationListTabState extends State<LocationListTab> {
+  late Future<List<Location>?> _locationsFuture;
   String _searchValue = "";
-
-  late Future<List<Medicine>> _medicinesFuture;
-
   @override
   void initState() {
     super.initState();
-    _medicinesFuture = Api().fetchMedicines();
+    _locationsFuture = Api().fetchLocations();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EasySearchBar(
-        title: Text('Medicines'),
-        searchHintText: "Search for a medicine",
+        title: Text('Locations'),
+        searchHintText: "Search for a location",
         onSearch: (value) => setState(() => _searchValue = value),
       ),
-      body: FutureBuilder<List<Medicine>>(
-        future: _medicinesFuture,
+      body: FutureBuilder<List<Location>?>(
+        future: _locationsFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final List<Medicine>? medicines = snapshot.data;
-            final filteredMedicines = _searchValue.isEmpty
+            final List<Location>? medicines = snapshot.data;
+            final filteredLocations = _searchValue.isEmpty
                 ? medicines
                 : medicines
                     ?.where((medicine) => medicine.name
@@ -41,12 +39,10 @@ class _MedicineListTabState extends State<MedicineListTab> {
                         .contains(_searchValue.toLowerCase()))
                     .toList();
             return ListView.builder(
-              itemCount: filteredMedicines?.length ?? 0,
+              itemCount: filteredLocations?.length ?? 0,
               itemBuilder: (context, index) {
-                final medicine = filteredMedicines![index];
-                return MedicineList(
-                  medicine: medicine,
-                );
+                final location = filteredLocations![index];
+                return LocationsList(location: location);
               },
             );
           } else if (snapshot.hasError) {

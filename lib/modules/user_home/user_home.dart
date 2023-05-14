@@ -1,3 +1,8 @@
+
+import 'package:dawaey/modules/MedicineByLocation/location_list_tab.dart';
+import 'package:dawaey/modules/MedicineByLocation/location_search.dart';
+import 'package:dawaey/modules/user_home/appbar_search.dart';
+import 'package:dawaey/modules/user_home/medicine_list.dart';
 import 'package:dawaey/modules/Search/search_screen.dart';
 import 'package:dawaey/modules/user_home/medicine_list_tab.dart';
 import 'package:flutter/material.dart';
@@ -39,5 +44,5 @@ class _UserHomeState extends State<UserHome> {
     );
   }
 
-  var tabs = [MedicineListTab(), SearchPage()];
+  var tabs = [MedicineListTab(), LocationListTab()];
 }

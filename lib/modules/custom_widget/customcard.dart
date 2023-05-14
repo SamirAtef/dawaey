@@ -24,7 +24,11 @@ class CustomCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('$text', ),
+              Expanded(
+                child: Text(
+                  '$text',
+                ),
+              ),
             ],
           ),
         ),
