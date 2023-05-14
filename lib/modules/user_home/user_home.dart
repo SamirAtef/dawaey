@@ -1,11 +1,10 @@
+
 import 'package:dawaey/modules/MedicineByLocation/location_list_tab.dart';
 import 'package:dawaey/modules/MedicineByLocation/location_search.dart';
 import 'package:dawaey/modules/user_home/appbar_search.dart';
 import 'package:dawaey/modules/user_home/medicine_list.dart';
+import 'package:dawaey/modules/Search/search_screen.dart';
 import 'package:dawaey/modules/user_home/medicine_list_tab.dart';
-import 'package:easy_search_bar/easy_search_bar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserHome extends StatefulWidget {
@@ -32,13 +31,13 @@ class _UserHomeState extends State<UserHome> {
           showSelectedLabels: true,
           showUnselectedLabels: false,
           items: [
-            BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.list_bullet), label: "List"),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.mosque,
-                ),
-                label: 'Charity'),
+            // BottomNavigationBarItem(
+            //     icon: Icon(CupertinoIcons.list_bullet), label: "List"),
+            // BottomNavigationBarItem(
+            //     icon: Icon(
+            //       Icons.mosque,
+            //     ),
+            //     label: 'Charity'),
           ],
         ),
       ),

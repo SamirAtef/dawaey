@@ -1,7 +1,12 @@
-import 'package:dawaey/shared/cubit/states.dart';
+import 'package:dawaey/modules/Search/search_screen.dart';
 import 'package:dawaey/shared/network/remote/dio_helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+//import 'package:news_app/cubit_app/states.dart';
+import '../modules/user_home/medicine_list_tab.dart';
+import '../shared/cubit/states.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() : super(NewsInitialState());
@@ -13,55 +18,46 @@ class NewsCubit extends Cubit<NewsStates> {
   List<BottomNavigationBarItem> bottomItems = [
     const BottomNavigationBarItem(
       icon: Icon(
-        Icons.business,
+        CupertinoIcons.list_bullet,
       ),
-      label: 'Business',
+      label: 'List',
     ),
     const BottomNavigationBarItem(
       icon: Icon(
-        Icons.sports,
+        Icons.mosque,
       ),
-      label: 'Sports',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(
-        Icons.science,
-      ),
-      label: 'Science',
+      label: 'Charity',
     ),
   ];
   List<Widget> screens = [
-//  const BusinessScreen(),
-    //const SportScreen(),
-    //const ScienceScreen(),
+    MedicineListTab(),
+    SearchPage(),
   ];
 
   void changeBottomNavBar(int index) {
     currentIndex = index;
     if (index == 0) {
-      getBusiness();
+      getMedicineList();
     }
     if (index == 1) {
-      getSports();
+      getCharityLocation();
     }
-    if (index == 2) {
-      getScience();
-    }
+    //if(index==2){getScience();}
     emit(NewsBottomNavState());
   }
 
-  List<dynamic> business = [];
+  List<dynamic> medicine = [];
 
-  void getBusiness() {
+  void getMedicineList() {
     emit(MedicineLoadingState());
-    DioHelper.getData(url: 'v2/top-headlines', query: {
-      'country': 'eg',
-      'category': 'business',
-      'apiKey': '87fffd0a3b67430b870a569522d54022',
+    DioHelper.getData(url: 'user/select_medcine.php', query: {
+      //'country':'eg',
+      //'category':'medcine',
+      //'apiKey':'87fffd0a3b67430b870a569522d54022',
     }).then((value) {
       //print(value.data.toString());
-      business = value?.data['articles'];
-      print(business[0]['title']);
+      medicine = value?.data['articles'];
+      print(medicine[0]['title']);
       emit(GetMedicineSuccessState());
     }).catchError((onError) {
       print(onError.toString());
@@ -69,19 +65,19 @@ class NewsCubit extends Cubit<NewsStates> {
     });
   }
 
-  List<dynamic> sports = [];
+  List<dynamic> charity = [];
 
-  void getSports() {
+  void getCharityLocation() {
     emit(CharityLocationLoadingState());
-    if (sports.isEmpty) {
-      DioHelper.getData(url: 'v2/top-headlines', query: {
-        'country': 'eg',
-        'category': 'sports',
-        'apiKey': '87fffd0a3b67430b870a569522d54022',
+    if (charity.isEmpty) {
+      DioHelper.getData(url: 'user/select_locations.php', query: {
+        // 'country':'eg',
+        'category': 'locations',
+        //'apiKey':'87fffd0a3b67430b870a569522d54022',
       }).then((value) {
         //print(value.data.toString());
-        sports = value?.data['articles'];
-        print(sports[0]['title']);
+        charity = value?.data['articles'];
+        print(charity[0]['title']);
         emit(GetCharityLocationSuccessState());
       }).catchError((onError) {
         print(onError.toString());
@@ -94,27 +90,29 @@ class NewsCubit extends Cubit<NewsStates> {
 
   List<dynamic> science = [];
 
-  void getScience() {
-    emit(NewsScienceLoadingState());
-    if (science.isEmpty) {
-      DioHelper.getData(url: 'v2/top-headlines', query: {
-        'country': 'eg',
-        'category': 'science',
-        'apiKey': '87fffd0a3b67430b870a569522d54022',
-      }).then((value) {
-        //print(value.data.toString());
-        science = value?.data['articles'];
-        print(science[0]['title']);
-        emit(NewsGetScienceSuccessState());
-      }).catchError((onError) {
-        print(onError.toString());
-        emit(NewsGetScienceErrorState(onError));
-      });
-    } else {
-      emit(NewsGetScienceSuccessState());
-    }
-  }
-
+// void getScience(){
+//   emit(NewsScienceLoadingState());
+//   if(science.isEmpty){
+//     DioHelper.getData(
+//       url: 'v2/top-headlines',
+//       query: {
+//         'country':'eg',
+//         'category':'science',
+//         'apiKey':'87fffd0a3b67430b870a569522d54022',
+//
+//       }).then((value){
+//     //print(value.data.toString());
+//     science=value?.data['articles'];
+//     print(science[0]['title']);
+//     emit(NewsGetScienceSuccessState());
+//   }).catchError((onError){
+//     print(onError.toString());
+//     emit(NewsGetScienceErrorState(onError));
+//   });}else{
+//     emit(NewsGetScienceSuccessState());
+//   }
+//
+// }
   List<dynamic> search = [];
 
   void getSearch(String value) {

@@ -7,12 +7,17 @@ import 'package:dawaey/shared/network/remote/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../modules/Search/search_screen.dart';
+import '../modules/user_home/medicine_list_tab.dart';
+
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopInitialState());
 
   static ShopCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
   List<Widget> bottomScreens = [
+    MedicineListTab(),
+    SearchPage()
     // const ProductsScreen(),
     // const CategoriesScreen(),
     // const FavoritesScreen(),

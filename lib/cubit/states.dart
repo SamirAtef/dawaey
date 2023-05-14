@@ -4,24 +4,24 @@ class NewsInitialState extends NewsStates {}
 
 class NewsBottomNavState extends NewsStates {}
 
-class MedicineLoadingState extends NewsStates {}
+class NewsBusinessLoadingState extends NewsStates {}
 
-class GetMedicineSuccessState extends NewsStates {}
+class NewsGetBusinessSuccessState extends NewsStates {}
 
-class GetMedicineErrorState extends NewsStates {
+class NewsGetBusinessErrorState extends NewsStates {
   final String error;
 
-  GetMedicineErrorState(this.error);
+  NewsGetBusinessErrorState(this.error);
 }
 
-class CharityLocationLoadingState extends NewsStates {}
+class NewsSportsLoadingState extends NewsStates {}
 
-class GetCharityLocationSuccessState extends NewsStates {}
+class NewsGetSportsSuccessState extends NewsStates {}
 
-class GetCharityLocationErrorState extends NewsStates {
+class NewsGetSportsErrorState extends NewsStates {
   final String error;
 
-  GetCharityLocationErrorState(this.error);
+  NewsGetSportsErrorState(this.error);
 }
 
 class NewsScienceLoadingState extends NewsStates {}

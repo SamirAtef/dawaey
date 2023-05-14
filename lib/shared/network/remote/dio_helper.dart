@@ -6,7 +6,7 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'https://student.valuxapps.com/api/',
+        baseUrl: 'https://medcine1231.000webhostapp.com/',
         receiveDataWhenStatusError: true,
       ),
     );
